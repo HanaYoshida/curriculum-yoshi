@@ -19,10 +19,10 @@
         <div class="row">
             <div class="col-8 offset-2 bg-white">
 
-                <div class="font-weight-bold text-center border-bottom pb-3 pt-3" style="font-size: 24px">プロフィール編集</div>
+                <div class="font-weight-bold text-center border-bottom pb-3 pt-3" style="font-size: 24px">アカウント情報変更</div>
 
                 <div class="card-body" style="text-align:center;">
-                <form action="" method="POST">
+                <form action="" method="POST" enctype=”multipart/form-data”>
                     @csrf
 
                     {{-- アバター画像 --}}
@@ -42,7 +42,7 @@
 
                     <div class="form-group my-3">
                         <label for="username">ユーザー名</label>
-                        <input id="username" type="text" class="form-control" name="username" value="{{ old('username', $user->user_name) }}">
+                        <input id="username" type="text" class="form-control" name="username" value="{{ old('username', $user->username) }}">
                     </div>
 
 
@@ -59,6 +59,11 @@
                     </div>
 
                 </form>
+                </div>
+
+
+                <div class="mt-3" style="text-align: right;">
+                    <a href="{{ route('delete.conf') }}">アカウント削除</a>
                 </div>
             </div>
         </div>

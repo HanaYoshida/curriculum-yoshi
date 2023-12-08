@@ -68,7 +68,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'user_name' => $data['username'],
+            'username' => $data['username'],
         ]);
     }
     public function redirectPath()

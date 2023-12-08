@@ -19,6 +19,8 @@
                 @endforeach
               </div>
             @endif
+
+
             <form action="{{ route('login') }}" method="POST">
               @csrf
               <div class="form-group mb-3">
@@ -33,10 +35,14 @@
                 <button type="submit" class='btn btn-outline-dark'>送信</button>
               </div>
             </form>
+            
+
           </div>
+
+
         </nav>
         <div class="text-center">
-          <a href="{{ route('password.request') }}">パスワードの変更はこちらから</a>
+          <a href="{{ route('password.request') }}">パスワード忘れた方はこちらから</a>
         </div>
       </div>
     </div>

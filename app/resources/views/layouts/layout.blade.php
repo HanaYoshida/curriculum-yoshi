@@ -23,17 +23,32 @@
           
           <div class="my-navbar-control">
             @if(Auth::check())
-              <a href="{{ route('mypage') }}" button type="button" class="btn btn-outline-dark">マイページ</a>
-              <a href="#" id="logout" button type="button" class="btn btn-outline-dark">ログアウト</a>
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-              @csrf
-              </form>
-              <script>
-              document.getElementById('logout').addEventListener('click', function(event) {
-                event.preventDefault();
-                document.getElementById('logout-form').submit();
-              });
-              </script>
+              @can('user')
+                <a href="{{ route('mypage') }}" button type="button" class="btn btn-outline-dark">マイページ</a>
+                <a href="#" id="logout" button type="button" class="btn btn-outline-dark">ログアウト</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+                </form>
+                <script>
+                document.getElementById('logout').addEventListener('click', function(event) {
+                  event.preventDefault();
+                  document.getElementById('logout-form').submit();
+                });
+                </script>
+              @elsecan('admin')
+                <a href="{{ route('admin.page') }}" button type="button" class="btn btn-outline-dark">管理者ページ</a>
+                <a href="#" id="logout" button type="button" class="btn btn-outline-dark">ログアウト</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+                </form>
+                <script>
+                document.getElementById('logout').addEventListener('click', function(event) {
+                  event.preventDefault();
+                  document.getElementById('logout-form').submit();
+                });
+                </script>
+              @endcan
+
             @else
 
               <a href="{{ route('register') }}" button type="button" class="btn btn-outline-dark">会員登録</a>
