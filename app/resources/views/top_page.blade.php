@@ -2,7 +2,7 @@
 @section('content')
 
 
-<main class="py-4">
+<main>
     <div class=mainlogo style="text-align: center;">
         <img src="/image/mainlogo.jpg" width="50%">
     </div>
@@ -29,10 +29,13 @@
 
         @foreach ($saunas as $sauna)
         <div class="row justify-content-center mb-3">
-            <div class="col-md-8 p-5 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
-                <p style="font-size: 22px;font-weight: bold;">{{ $sauna['name'] }}</p>
-                <p>{{ $sauna['address'] }}</p>
+            <div class="col-md-8 p-5 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" >
+                <a href="{{ route('sauna', ['id' => $sauna['id']]) }}" style="text-decoration: none;">
+                    <p style="font-size: 22px;font-weight: bold;">{{ $sauna['name'] }}</p>
+                    <p>{{ $sauna['address'] }}</p>
+                </a>
             </div>
+            
         </div>
         @endforeach
         

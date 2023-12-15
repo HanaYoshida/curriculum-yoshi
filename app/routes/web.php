@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DisplayController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\TestMailController;
+use App\Http\Controllers\LikeController;
+
 
 
 
@@ -20,6 +23,10 @@ use App\Http\Controllers\AdminController;
 
 
 Route::get('/', [DisplayController::class, 'index']);
+Route::get('/mail', [TestMailController::class, 'mail']);
+Route::get('/sauna/{id}', [DisplayController::class, 'sauna'])->name('sauna');
+Route::get('/like/{id}', [LikeController::class, 'like'])->name('like');
+Route::get('/unlike/{id}', [LikeController::class, 'unlike'])->name('unlike');
 
 
 //一般ユーザー
@@ -64,6 +71,4 @@ Route::group(['middleware' =>['auth', 'can:admin']], function() {
 
 });
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');

@@ -19,12 +19,21 @@ class RegistrationController extends Controller
     //アカウント情報変更登録
     public function userEdit(Request $request) {
         $user = Auth::user();
-        $columns = ['name', 'username', 'email'];
+        $columns = ['name', 'username', 'email', 'profile'];
         foreach($columns as $column) {
             $user->$column = $request->$column;
         }
-        Auth::user()->save();
-        return redirect('/mypage');
+
+        $updateUser = $request->all();
+        if ($request->profile != null) {
+            $file_name = $request->profile->getClientOriginalName();
+            $profileImagePath = $request->profile->storeAs('public', $file_name);
+            $updateUser['profile'] = $profileImagePath;
+            $user->profile = basename($profileImagePath);
+        }
+        $loginUser = Auth::user();
+        $loginUser->fill($updateUser)->save();
+        return redirect()->route('user.edit', Auth::user());
     } 
 
     //アカウント情報削除(物理削除)
@@ -47,6 +56,10 @@ class RegistrationController extends Controller
         Auth::user()->userrequest()->save($userrequest);
         return view('/request_comp');
     } 
+
+    //サウナページイイネ
+    
+
 
     
 

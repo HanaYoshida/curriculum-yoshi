@@ -2,7 +2,7 @@
 @section('content')
 
 
-    <main class="py-4">
+    <main>
         
         <div id="profile-edit-form" class="container">
             <div class="row">

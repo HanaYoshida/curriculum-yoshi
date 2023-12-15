@@ -2,10 +2,10 @@
 @section('content')
 
 
-<main class="py-4">
+<main>
 
 
-<div id="profile-edit-form" class="container">
+    <div id="profile-edit-form" class="container">
         <div class="row">
             <div class="col-8 offset-2">
                 @if (session('status'))
@@ -21,16 +21,26 @@
 
                 <div class="font-weight-bold text-center border-bottom pb-3 pt-3" style="font-size: 24px">アカウント情報変更</div>
 
-                <div class="card-body" style="text-align:center;">
-                <form action="" method="POST" enctype=”multipart/form-data”>
+                <div class="card-body mt-4" style="text-align:center;">
+                <form action="" method="POST" enctype="multipart/form-data">
                     @csrf
+
 
                     {{-- アバター画像 --}}
                     <span class="avatar-form image-picker">
-                        <input type="file" name="avatar" class="d-none" accept="image/png,image/jpeg,image/gif" id="avatar" />
                         <label for="avatar" class="d-inline-block">
-                            <img src="/image/user_icon.png" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;">
+                            @if ($user->profile === null)
+                                <img src="{{ asset('/image/user_icon.png') }}" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;">
+                            @else
+                                <img src="{{ Storage::url($user->profile) }}" class="rounded-circle" style="object-fit: cover; width: 200px; height: 200px;">
+                            @endif
+                            <input id="profile" name="profile" type="file" class="form-control my-3 @error('profile') is-invalid @enderror" value="{{ old('profile', $user->profile) }}" accept="image/png, image/jpeg,image/gif">
                         </label>
+                        @error('profile')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </span>
 
                     {{-- ユーザー情報 --}}
