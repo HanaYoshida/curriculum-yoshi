@@ -150,7 +150,14 @@ return [
         'name' => '氏名',
         'username' => 'ユーザー名',
         'email' => 'メールアドレス',
-        'passwaod' => 'パスワード',
+        'password' => 'パスワード',
+        'saunaname' => '施設名',
+        'address' => '施設住所',
+        'url' => '施設URL',
+        'closed' => '定休日',
+        'temperature' => 'サウナ温度',
+        'body' => 'コメント',
+
 
     ],
 

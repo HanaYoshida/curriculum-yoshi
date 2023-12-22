@@ -3,7 +3,7 @@
 
 
     <main>
-        <div id="profile-edit-form" class="container">
+        <div id="profile-edit-form" class="container mt-5">
             <div class="row">
                 <div class="col-8 offset-2 bg-white">
                     <div class="font-weight-bold text-center border-bottom pb-3 pt-3" style="font-size: 24px">リクエスト一覧</div>    
@@ -24,12 +24,12 @@
                         <tbody>
                             @foreach($userrequests as $request)
                                 <tr>
-                                    <th scope='col'>{{ $request->user->name }}</th>
-                                    <th scope='col'>{{ $request['name'] }}</th>
+                                    <th scope='col'>{{ $request->user->name ?? '退会したユーザー' }}</th>
+                                    <th scope='col'>{{ $request['saunaname'] }}</th>
                                     <th scope='col'>{{ $request['address'] }}</th>
                                     <th scope='col'>{{ $request['url'] }}</th>
                                     <th scope='col'>
-                                    <form onsubmit="return confirm('元に戻すことは出来ません。本当に削除しますか？')" action="{{ route('request.destroy', ['id' => $request['id']]) }}" method="post">
+                                    <form onsubmit="return confirm('元に戻すことは出来ません。本当に削除しますか？')" action="{{ route('request.destroy', ['userrequest' => $request['id']]) }}" method="post">
                                     @csrf
                                     @method('delete')
                                     <button type="submit" class="btn btn-danger btn-sm">削除</button>

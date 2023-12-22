@@ -9,7 +9,7 @@
 
   <body>
     <div id="app">
-      <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm mb-5">
+      <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
 
           <a href="{{ url('/') }}">
@@ -24,7 +24,11 @@
           <div class="my-navbar-control">
             @if(Auth::check())
               @can('user')
-                <a href="{{ route('mypage') }}" button type="button" class="btn btn-outline-dark">マイページ</a>
+                <a href="{{ route('like.list') }}" button type="button" class="btn">いいね</a>
+                <a href="{{ route('request.form') }}" button type="button" class="btn">リクエスト</a>
+                <a href="{{ route('user.edit') }}" button type="button" class="btn">設定</a>
+
+
                 <a href="#" id="logout" button type="button" class="btn btn-outline-dark">ログアウト</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
@@ -35,8 +39,14 @@
                   document.getElementById('logout-form').submit();
                 });
                 </script>
+
+
               @elsecan('admin')
-                <a href="{{ route('admin.page') }}" button type="button" class="btn btn-outline-dark">管理者ページ</a>
+                <a href="{{ route('user.list') }}" button type="button" class="btn">ユーザー</a>
+                <a href="{{ route('request.list') }}" button type="button" class="btn">リクエスト</a>
+                <a href="{{ route('sauna.create') }}" button type="button" class="btn">サウナ作成</a>
+                <a href="{{ route('sauna.index') }}" button type="button" class="btn">サウナ一覧</a>
+
                 <a href="#" id="logout" button type="button" class="btn btn-outline-dark">ログアウト</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf

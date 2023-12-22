@@ -15,4 +15,7 @@ class Sauna extends Model
     public function like() {
         return $this->hasMany('App\Like');
     }
+    public function review() {
+        return $this->hasMany('App\Review');
+    }
 }

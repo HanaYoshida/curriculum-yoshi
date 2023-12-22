@@ -7,6 +7,8 @@ use App\User;
 use App\UserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\UserEdit;
+use App\Http\Requests\UserRequestData;
 
 class RegistrationController extends Controller
 {
@@ -17,7 +19,7 @@ class RegistrationController extends Controller
     }
 
     //アカウント情報変更登録
-    public function userEdit(Request $request) {
+    public function userEdit(UserEdit $request) {
         $user = Auth::user();
         $columns = ['name', 'username', 'email', 'profile'];
         foreach($columns as $column) {
@@ -47,20 +49,13 @@ class RegistrationController extends Controller
     public function UserRequest() {
         return view('request_form');
     }    
-    public function UserRequestForm(Request $request) {
+    public function UserRequestForm(UserRequestData $request) {
         $userrequest = new Userrequest;
-        $columns = ['name', 'address', 'url'];
+        $columns = ['saunaname', 'address', 'url'];
         foreach($columns as $column) {
             $userrequest->$column = $request->$column;
         }
         Auth::user()->userrequest()->save($userrequest);
         return view('/request_comp');
     } 
-
-    //サウナページイイネ
-    
-
-
-    
-
 }

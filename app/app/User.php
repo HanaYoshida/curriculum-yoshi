@@ -45,8 +45,10 @@ class User extends Authenticatable
     public function sauna() {
         return $this->hasMany('App\Sauna');
     }
- 
     public function like() {
         return $this->hasMany('App\Like');
+    }
+    public function review() {
+        return $this->hasMany('App\Review');
     }
 }

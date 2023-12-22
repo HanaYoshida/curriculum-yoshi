@@ -2,7 +2,7 @@
 @section('content')
 
 <main>
-    <div id="profile-edit-form" class="container">
+    <div id="profile-edit-form" class="container mt-5">
         <div class="row">
             <div class="col-8 offset-2 bg-white">
 
