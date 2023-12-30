@@ -19,9 +19,10 @@ class SaunaController extends Controller
         $sauna = new Sauna;
         $search = $request->input('search');
         if (!empty($search)) {
-            $get = $sauna->where('saunaname', 'LIKE', "%{$search}%")->get();
+            $get = $sauna->orderBy('created_at', 'desc')->where('saunaname', 'LIKE', "%{$search}%")->orWhere('address','LIKE',"%{$search}%")
+            ->paginate(6);
         } else {
-            $get = $sauna->all()->toArray();
+            $get = $sauna->orderBy('created_at', 'desc')->paginate(6);
         }
         return view('sauna.index', [
             'saunas' => $get,
@@ -52,7 +53,15 @@ class SaunaController extends Controller
         foreach($columns as $column) {
             $sauna->$column = $request->$column;
         }
-        $sauna->save();
+        $createSauna = $request->all();
+        if ($request->image != null) {
+            $file_name = $request->image->getClientOriginalName();
+            $saunaImagePath = $request->image->storeAs('public', $file_name);
+            $createSauna['image'] = $saunaImagePath;
+            $sauna->image = basename($saunaImagePath);
+        }
+        $sauna->fill($createSauna)->save();
+
         return redirect('/sauna');
     }
 
@@ -93,7 +102,14 @@ class SaunaController extends Controller
         foreach($columns as $column) {
             $sauna->$column = $request->$column;
         }
-        $sauna->save();
+        $updateSauna = $request->all();
+        if ($request->image != null) {
+            $file_name = $request->image->getClientOriginalName();
+            $saunaImagePath = $request->image->storeAs('public', $file_name);
+            $updateSauna['image'] = $saunaImagePath;
+            $sauna->image = basename($saunaImagePath);
+        }
+        $sauna->fill($updateSauna)->save();
         return redirect('/sauna');
     }
 

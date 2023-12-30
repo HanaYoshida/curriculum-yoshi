@@ -2,7 +2,7 @@
 @section('content')
 
     <main>
-        <div id="profile-edit-form" class="container mt-5">
+        <div id="profile-edit-form" class="container mt-5 mb-5">
             <div class="row">
                 <div class="col-8 offset-2 bg-white">
                     <div class="font-weight-bold text-center border-bottom pb-3 pt-3" style="font-size: 24px">サウナ投稿</div>
@@ -20,7 +20,7 @@
                             @endif
                         </div>
 
-                        <form action="{{ route('sauna.store') }}" method="POST">
+                        <form action="{{ route('sauna.store') }}" method="POST"  enctype="multipart/form-data">
                         @csrf
 
                             <div class="form-group mb-3">
@@ -47,6 +47,18 @@
                                 <label for="temperature">サウナ温度</label>
                                 <input type="text" class="form-control m-auto" id="temperature" name="temperature" value="{{ old('temperature') }}" style="width: 60%;"/>
                             </div>
+
+                            <!-- 画像 -->
+                            <span class="avatar-form image-picker">
+                                <label for="avatar" class="d-inline-block">
+                                    <input id="image" name="image" type="file" class="form-control my-3 @error('image') is-invalid @enderror" value="{{ old('image') }}" accept="image/png, image/jpeg,image/gif">
+                                </label>
+                                @error('image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </span>
 
                             
 

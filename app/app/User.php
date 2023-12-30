@@ -51,4 +51,14 @@ class User extends Authenticatable
     public function review() {
         return $this->hasMany('App\Review');
     }
+    public function join_likes_saunas() {
+        return $this->hasManyThrough(
+            'App\Sauna',    //リレーションして取りたいテーブル
+            'App\Like',     //経由するテーブル
+            'user_id',      //likesテーブルをusersテーブルと結ぶための外部キー
+            'id',           //saunasテーブルの外部キー
+            null,           //usersテーブルのローカルキー
+            'sauna_id'      //likesとsaunasを結ぶために使うキー
+        );
+    }
 }

@@ -51,7 +51,13 @@ class DisplayController extends Controller
     
     //イイネ一覧
     public function LikeList() {
-      
-        return view('like_list');
+        $user_id = Auth::user()->id;
+        $saunas = DB::table('saunas')
+        ->join('likes', 'saunas.id', '=', 'likes.sauna_id')
+        ->where('likes.user_id', '=', $user_id)
+        ->paginate(6);
+        return view('like_list')->with([
+            'saunas' => $saunas,
+        ]);
     }
 }

@@ -13,7 +13,7 @@
         <div class="container">
 
           <a href="{{ url('/') }}">
-            <img src="/image/headerlogo.jpg" style="
+            <img src="/image/headerlogo.JPG" style="
                 object-fit: cover;
                 width: 135px;
                 height: 45px;

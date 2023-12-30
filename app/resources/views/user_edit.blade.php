@@ -38,7 +38,7 @@
                         <form action="" method="POST" enctype="multipart/form-data">
                         @csrf
 
-                            {{-- アバター画像 --}}
+                            <!-- プロフィール画像 -->
                             <span class="avatar-form image-picker">
                                 <label for="avatar" class="d-inline-block">
                                     @if ($user->profile === null)
@@ -55,7 +55,7 @@
                                 @enderror
                             </span>
 
-                            {{-- ユーザー情報 --}}
+                            <!-- ユーザー情報 -->
                             <div class="form-group my-3">
                                 <label for="name">氏名</label>
                                 <input id="name" type="text" class="form-control m-auto" name="name" value="{{ old('name', $user->name) }}" style="width: 60%;">

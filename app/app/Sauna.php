@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 class Sauna extends Model
 {
+    protected $fillable = ['saunaname','address','closed', 'url', 'temperature', 'image'];
+
     public function user() {
         return $this->belongsTo('App\User');
     }

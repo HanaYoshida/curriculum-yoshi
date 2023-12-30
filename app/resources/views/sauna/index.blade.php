@@ -19,61 +19,49 @@
                             </form>
                         </div>
                     </div>
-
-
-                    
-                    <table class='table'>
-                        <thead>
-                            <tr>
-                                <th scope='col'>施設名</th>
-                                <th scope='col'></th>
-                                <th scope='col'></th>
-                                <th scope='col'></th>
-                                
-                            </tr>
-                        </thead>
-
-
-
-                        <tbody>
-                            @foreach($saunas as $sauna)
-                                <tr>
-                                    <th scope='col'>{{ $sauna['saunaname'] }}</th>
-                                    <th scope='col'>
-                                        <a href="{{ route('saunapage', ['sauna' => $sauna['id']]) }}">
-                                            <button type="submit" class="btn btn-primary btn-sm">サウナ</button>
-                                        </a>
-                                    </th> 
-
-                                    <th scope='col'>
-                                        <a href="{{ route('sauna.edit', ['sauna' => $sauna['id']]) }}" button type="submit" class="btn btn-warning btn-sm">編集</a>
-                                    </th>
-
-                                    <th scope='col'>
-                                        <form onsubmit="return confirm('元に戻すことは出来ません。本当に削除しますか？')" action="{{ route('sauna.destroy', ['sauna' => $sauna['id']]) }}" method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button type="submit" class="btn btn-danger btn-sm">削除</button>
-                                        </form>
-                                    </th>
-
-                                </tr> 
-                            @endforeach
-                        </tbody>
-                    </table>
-
-
-
-
-
-
-
-                    
                 </div>
             </div>
         </div>
 
 
-    </main>
 
+
+        <div class="container my-5" id="skill">
+            <div class="row row-cols-1 row-cols-md-3">
+                @foreach ($saunas as $sauna)
+                    <div class="col mb-4">
+                        <div class="card">
+
+                        
+                            @if ($sauna->image === null)
+                                <img src="{{ asset('/image/noimage.JPG') }}" class="card-img-top" style="object-fit: cover;">
+                            @else
+                                <img src="{{ Storage::url($sauna->image) }}" class="card-img-top" style="object-fit: cover;">
+                            @endif
+
+
+                            <div class="card-body">
+                                <a href="{{ route('saunapage', ['sauna' => $sauna['id']]) }}" style="text-decoration: none;">
+                                    <h5 class="card-title">{{ $sauna['saunaname'] }}</h5>
+                                </a>
+                                <p class="card-text">{{ $sauna['address'] }}</p>
+                            
+
+                                <div class="d-flex justify-content-around">
+                                    <a href="{{ route('sauna.edit', ['sauna' => $sauna['id']]) }}" button type="submit" class="btn btn-outline-warning">編集</a>
+                                    <form onsubmit="return confirm('元に戻すことは出来ません。本当に削除しますか？')" action="{{ route('sauna.destroy', ['sauna' => $sauna['id']]) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-outline-danger">削除</button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+                {{ $saunas->links() }}                            
+            </div>
+        </div>            
+    </main>
 @endsection

@@ -43,7 +43,7 @@
                                     <form onsubmit="return confirm('元に戻すことは出来ません。本当に削除しますか？')" action="{{ route('user.destroy', ['user' => $user['id']]) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="btn btn-danger btn-sm">削除</button>
+                                    <button type="submit" class="btn btn-outline-danger btn-sm">削除</button>
                                     </form>
                                     </th>
 
