@@ -50,7 +50,8 @@ class AdminController extends Controller
         $userrequest->delete();
         return redirect('/request_list');
     }
-   
+
+
     
     
 }

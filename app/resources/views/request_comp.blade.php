@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-8 offset-2 bg-white">
 
-                <div class="font-weight-bold text-center pt-3" style="font-size: 20px">リクエストありがとうございました</div>
+                <div class="font-weight-bold text-center pt-3" style="font-size: 20px">リクエストありがとうございました！</div>
                 <div class="font-weight-bold text-center border-bottom pb-3" style="font-size: 20px">確認後掲載させていただきますので今しばらくお待ちください</div>
 
                 <div class="navbar justify-content-center">

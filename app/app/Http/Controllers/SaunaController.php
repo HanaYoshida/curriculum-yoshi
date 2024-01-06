@@ -103,7 +103,7 @@ class SaunaController extends Controller
             $sauna->$column = $request->$column;
         }
         $updateSauna = $request->all();
-        if ($request->image != null) {
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $file_name = $request->image->getClientOriginalName();
             $saunaImagePath = $request->image->storeAs('public', $file_name);
             $updateSauna['image'] = $saunaImagePath;

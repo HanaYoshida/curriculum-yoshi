@@ -31,7 +31,9 @@
                         </div>
                     </div>
                 @endforeach
-                {{ $saunas->links() }}   
+                <div class="row row-cols-1 row-cols-md-3">
+                    {{ $saunas->links() }}
+                </div>
             </div>
         </div>
 

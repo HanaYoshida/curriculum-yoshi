@@ -7,9 +7,9 @@
         <div id="profile-edit-form" class="container mt-5 mb-5">
             <div class="row">
                 <div class="col-8 offset-2 bg-white">
-                    <div class="font-weight-bold text-center border-bottom pb-3 pt-3" style="font-size: 24px">サウナ編集</div>
+                    <div class="font-weight-bold text-center border-bottom pb-3 pt-3" style="font-size: 24px">編集</div>
 
-                    <div class="mt-5" style="text-align:center;">
+                    <div class="mt-3" style="text-align:center;">
                         <div class='panel-body'>
                             @if($errors->any())
                             <div class='alert alert-danger'>
@@ -25,6 +25,23 @@
                         <form action="/sauna/{{ $sauna->id }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
+
+                        <!-- 画像 -->
+                            <span class="avatar-form image-picker">
+                                <label for="avatar" class="d-inline-block">
+                                    @if ($sauna->image === null)
+                                        <img src="{{ asset('/image/noimage.JPG') }}" style="object-fit: cover; width: 400px; height: 300px;">
+                                    @else
+                                        <img src="{{ Storage::url($sauna->image) }}" style="object-fit: cover; width: 400px; height: 300px;">
+                                    @endif
+                                    <input id="image" name="image" type="file" class="form-control my-3 @error('image') is-invalid @enderror" value="{{ old('image', $sauna->image) }}" accept="image/png, image/jpeg,image/gif">
+                                </label>
+                                @error('image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </span>
 
                             <div class="form-group mb-3">
                                 <label for="saunaname">施設名</label>
@@ -50,22 +67,7 @@
                                 <label for="temperature">サウナ温度</label>
                                 <input type="text" class="form-control m-auto" id="temperature" name="temperature" value="{{ old('temperature', $sauna->temperature) }}" style="width: 60%;" />
                             </div>
-
-                            <!-- 画像 -->
-                            <span class="avatar-form image-picker">
-                                <label for="avatar" class="d-inline-block">
-                                    <input id="image" name="image" type="file" class="form-control my-3 @error('image') is-invalid @enderror" value="{{ old('image', $sauna->image) }}" accept="image/png, image/jpeg,image/gif">
-                                </label>
-                                @error('image')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </span>
-
-                        
-
-                            
+    
                             <div class="text-right">
                                 <button type="submit" class='btn btn-outline-dark'>送信</button>
                             </div>

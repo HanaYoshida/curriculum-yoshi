@@ -6,6 +6,7 @@
         <div class="row">
             <div class="col-8 offset-2 bg-white">
                 <div class="font-weight-bold text-center border-bottom pb-3 pt-3" style="font-size: 24px">サウナリクエスト</div>
+                <div class="font-weight-bold text-center pb-3" style="font-size: 20px">未掲載サウナのリクエストにご協力をお願いいたします。</div>
 
                     <div class="mt-5" style="text-align:center;">
 
